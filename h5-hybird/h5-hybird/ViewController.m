@@ -18,17 +18,22 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    NSMutableString *mutableStr = [NSMutableString stringWithCapacity: 50];
-    [mutableStr appendString: @"hello"];
-    [mutableStr appendFormat: @"%s", "oc"];
+    // 屏幕宽高
+    CGFloat viewWidth = self.view.frame.size.width;
+    CGFloat viewHeight = self.view.frame.size.height;
+    // 创建web view视图
+    UIWebView *webView = [[UIWebView alloc] initWithFrame: CGRectMake(0, 35, viewWidth, viewHeight-35)];
     
-    // 只能存储oc对象，最后画nil表示结束的标记符号，nil在C语言中表示对象的null值。
-    NSArray *arr = [NSArray arrayWithObjects: @"hello", @"oc", nil];
+    // 关闭web view 滚动
+    webView.scrollView.bounces = NO;
+    // 添加web view
+    [self.view addSubview: webView];
     
-    for(NSInteger i = 0; i < [arr count]; i++) {
-        NSLog(@"arr %d is %@", i, [arr objectAtIndex: i]);
-    }
-    
+    // 使用服务器中的页面部署至web view中
+    NSString *path = @"http://www.baidu.com";
+    NSURL *url = [NSURL URLWithString: path];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [webView loadRequest:request];
     
 }
 
