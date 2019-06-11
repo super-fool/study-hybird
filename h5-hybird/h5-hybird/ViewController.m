@@ -30,9 +30,19 @@
     [self.view addSubview: webView];
     
     // 使用服务器中的页面部署至web view中
-    NSString *path = @"http://www.baidu.com";
-    NSURL *url = [NSURL URLWithString: path];
+    //    NSString *path = @"http://www.baidu.com";
+    //    NSURL *url = [NSURL URLWithString: path];
+    //    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    //    [webView loadRequest:request];
+    
+    
+    // 本地页面加载至web view
+    // 1. 获取本地网页路径
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"web-app/index.html" ofType:nil];
+    // 2. 创建网页加载请求
+    NSURL *url = [NSURL URLWithString:path];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    // web view 加载请求
     [webView loadRequest:request];
     
 }
